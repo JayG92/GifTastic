@@ -1,36 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel= "stylesheet" href="assets/css/style.css">
-
+    <title>Cars Gifs</title>
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script type="text/javascript"></script>
 
 
 </head>
-<body>
-    <!-- start of buttons -->
-    <button data-animals="dog">Dog</button>
-    <!-- end of buttons -->
-    
-    
-    
-    <!-- load gify src url here -->
-    <script></script>
-    <!-- end of gify URL -->
-<!-- Steps -->
-<!-- add an event listener code to buttons -->
+<div class="container">
+    <nav>
+        <H1>GIFs</H1>
+    </nav>
+    <hr>
+
+    <body>
+
+        <div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search for a Gif" aria-label="Search for a Gif"
+                    aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- start of buttons -->
+        <button data-animals="dog">Cars</button>
+        <button data-animals="dog">Cars</button>
+        <button data-animals="dog">Dog</button>
+        <button data-animals="dog">Dog</button>
+        <button data-animals="dog">Dog</button>
+        <button data-animals="dog">Dog</button>
+        <button data-animals="dog">Dog</button>
+        <button data-animals="dog">Dog</button>
+        <button data-animals="dog">Dog</button>
+        <!-- end of buttons -->
+
+
+        <!-- where gifs will appear on page -->
+        <div id="gifs-appear-here"></div>
+        <!-- end of gifs image section -->
 
 
 
 
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+    </body>
+</div>
 
-
-
-
-
-</body>
 </html>
