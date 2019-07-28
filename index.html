@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
-    <script type="text/javascript"></script>
+   
+
 
 
 </head>
@@ -21,18 +22,19 @@
     <hr>
 
     <body>
-
-        <div>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search for a Gif" aria-label="Search for a Gif"
-                    aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+        <!-- search bar -->
+        <div class='container2'>
+            <form>
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" class="form-control" id="input" placeholder="Search">
                 </div>
-            </div>
+               
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            </form>
         </div>
-
-
+        <!-- end of search bar -->
+<br>
         <!-- start of buttons -->
         <button data-animals="dog">Cars</button>
         <button data-animals="dog">Cars</button>
@@ -44,10 +46,14 @@
         <button data-animals="dog">Dog</button>
         <button data-animals="dog">Dog</button>
         <!-- end of buttons -->
-
+        <hr>
 
         <!-- where gifs will appear on page -->
-        <div id="gifs-appear-here"></div>
+        <div class="container">
+
+            <div id="gifs-appear-here"></div>
+
+        </div>
         <!-- end of gifs image section -->
 
 
@@ -56,6 +62,8 @@
         <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+            <script src="assets/javascript/app.js"></script>
 
     </body>
 </div>
