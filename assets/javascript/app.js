@@ -1,3 +1,104 @@
+$(document).ready(function (){
+ // Initial array of movies
+ var movies = ["Ferrari", "Porsche", "Corvette", "GTR"];    
+ //    global variables
+    let $input = $('#input');
+
+    let $submit = $('#submit');
+
+
+
+    // /   get value when user clicks on submit button
+    $submit.on('click', function () {
+        // prevents from clearing out after hitting submit
+        event.preventDefault();
+        var inputVal = $input.val();
+        // grabs value when entered in input
+        console.log(inputVal);
+
+    });
+
+
+
+ // displayMovieInfo function re-renders the HTML to display the appropriate content
+ function displayMovieInfo() {
+
+   var inputVal = $(this).attr("data-name");
+   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +inputVal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+
+   // Creating an AJAX call for the specific movie button being clicked
+   $.ajax({
+       url: queryURL,
+       method: "GET"
+   })
+   .then(function(response){   
+       console.log(response.data);     
+       let results = response.data;          
+       for (var i = 0; i < results.length; i++) {               
+           if (results[i].rating!== "r" && results[i].rating!=="pg-13"){
+               let gifDiv = $('<div>');
+               let rating = results[i].rating;
+               let p = $('<p>').text('Rating ' + rating);
+               let personImage = $('<img>');
+             
+               personImage.attr('src', results[i].images.fixed_height.url);
+
+               gifDiv.append(p);
+               gifDiv.append(personImage);
+
+               $('#gifs-appear-here').prepend(gifDiv);
+
+           }
+       }
+   })}
+   
+
+ // Function for displaying movie data
+ function renderButtons() {
+
+   // Deleting the movies prior to adding new movies
+   // (this is necessary otherwise you will have repeat buttons)
+   $("#buttons-view").empty();
+
+   // Looping through the array of movies
+   for (var i = 0; i < movies.length; i++) {
+
+     // Then dynamicaly generating buttons for each movie in the array
+     // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+     var a = $("<button>");
+     // Adding a class of movie-btn to our button
+     a.addClass("movie-btn");
+     // Adding a data-attribute
+     a.attr("data-name", movies[i]);
+     // Providing the initial button text
+     a.text(movies[i]);
+     // Adding the button to the buttons-view div
+     $("#buttons-view").append(a);
+   }
+ }
+
+ // This function handles events where a movie button is clicked
+ $("#add-movie").on("click", function(event) {
+   event.preventDefault();
+   // This line grabs the input from the textbox
+   var movie = $("#movie-input").val().trim();
+
+   // Adding movie from the textbox to our array
+   movies.push(movie);
+
+   // Calling renderButtons which handles the processing of our movie array
+   renderButtons();
+ });
+
+ // Adding a click event listener to all elements with a class of "movie-btn"
+ $(document).on("click", ".movie-btn", displayMovieInfo);
+
+ // Calling the renderButtons function to display the intial buttons
+ renderButtons();
+    
+});
+
+
 // function getData() {
 //     event.preventDefault();
 //     var input = $("#input").val()
@@ -30,65 +131,60 @@
 
 
 // working code set (adds user input but not data)
-$(document).ready(function () {
-    // global variables
-    let $input = $('#input');
+// $(document).ready(function () {
+//     // global variables
+//     let $input = $('#input');
 
-    let $submit = $('#submit');
-    // let apiKey = 'BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9';
-
-    // $('#submit').on("click", function() {
-    //     // In this case, the "this" keyword refers to the button that was clicked
-    //     event.preventDefault();
-    //     // var newHero = $('#superHeroInput').val();
-    //     // console.log (superHero)
-
-    // /   get value when user clicks on submit button
-    $submit.on('click', function () {
-        // prevents from clearing out after hitting submit
-        event.preventDefault();
-        var inputVal = $input.val();
-        // grabs value when entered in input
-        console.log(inputVal);
+//     let $submit = $('#submit');
 
 
-        // make a request to the gif api
-        // var gif = $(this).attr("data-gif");
-    // let apiKey = 'BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9';
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + inputVal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
 
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        .then(function(response){
-            
-            console.log(response.data);
-            
-            let results = response.data;
-          
-           
-            for (var i = 0; i < results.length; i++) {
-                
-                if (results[i].rating!== "r" && results[i].rating!=="pg-13"){
-                    let gifDiv = $('<div>');
-                    let rating = results[i].rating;
-                    let p = $('<p>').text('Rating ' + rating);
-                    let personImage = $('<img>');
-                    personImage.attr('src', results[i].images.fixed_height.url);
+//     // /   get value when user clicks on submit button
+//     $submit.on('click', function () {
+//         // prevents from clearing out after hitting submit
+//         event.preventDefault();
+//         var inputVal = $input.val();
+//         // grabs value when entered in input
+//         console.log(inputVal);
 
-                    gifDiv.append(p);
-                    gifDiv.append(personImage);
 
-                    $('#gifs-appear-here').prepend(gifDiv);
+//         // make a request to the gif api
+//         // var gif = $(this).attr("data-gif");
+//     // let apiKey = 'BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9';
+//         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + inputVal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
 
-                }
-            }
-        })
-    });
+//         $.ajax({
+//             url: queryURL,
+//             method: "GET"
+//         })
+//         .then(function(response){   
+//             console.log(response.data);     
+//             let results = response.data;          
+//             for (var i = 0; i < results.length; i++) {               
+//                 if (results[i].rating!== "r" && results[i].rating!=="pg-13"){
+//                     let gifDiv = $('<div>');
+//                     let rating = results[i].rating;
+//                     let p = $('<p>').text('Rating ' + rating);
+//                     let personImage = $('<img>');
+                  
+//                     personImage.attr('src', results[i].images.fixed_height.url);
 
-    //     // end of working code (adds typed input but not data)
-});
+//                     gifDiv.append(p);
+//                     gifDiv.append(personImage);
+
+//                     $('#gifs-appear-here').prepend(gifDiv);
+
+//                 }
+//             }
+//         })
+
+
+//     });
+
+
+
+//     //     // end of working code (adds typed input but not data)
+// });
 
 
 

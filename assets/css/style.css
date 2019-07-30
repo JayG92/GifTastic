@@ -1,3 +1,8 @@
 .container{
-    background-color: lightskyblue;
+    background-color: lightslategray;
     border-radius: 5px;
+}
+
+body{
+    background-color: lightblue;
+}
