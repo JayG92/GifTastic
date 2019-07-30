@@ -1,7 +1,7 @@
-$(document).ready(function (){
- // Initial array of movies
- var movies = ["Ferrari", "Porsche", "Corvette", "GTR"];    
- //    global variables
+$(document).ready(function () {
+    // Initial array of cars
+    var cars = ["Ferrari", "Porsche", "Corvette", "GTR"];
+    //    global variables
     let $input = $('#input');
 
     let $submit = $('#submit');
@@ -20,83 +20,99 @@ $(document).ready(function (){
 
 
 
- // displayMovieInfo function re-renders the HTML to display the appropriate content
- function displayMovieInfo() {
 
-   var inputVal = $(this).attr("data-name");
-   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +inputVal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+    function displayInfo() {
 
-   // Creating an AJAX call for the specific movie button being clicked
-   $.ajax({
-       url: queryURL,
-       method: "GET"
-   })
-   .then(function(response){   
-       console.log(response.data);     
-       let results = response.data;          
-       for (var i = 0; i < results.length; i++) {               
-           if (results[i].rating!== "r" && results[i].rating!=="pg-13"){
-               let gifDiv = $('<div>');
-               let rating = results[i].rating;
-               let p = $('<p>').text('Rating ' + rating);
-               let personImage = $('<img>');
-             
-               personImage.attr('src', results[i].images.fixed_height.url);
+        var inputVal = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + inputVal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
 
-               gifDiv.append(p);
-               gifDiv.append(personImage);
+        
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                console.log(response.data);
+                let results = response.data;
+                for (var i = 0; i < results.length; i++) {
+                    if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                        let gifDiv = $('<div>');
+                        let rating = results[i].rating;
+                        let p = $('<p>').text('Rating ' + rating);
+                        let personImage = $('<img>');
 
-               $('#gifs-appear-here').prepend(gifDiv);
+                        personImage.attr('src', results[i].images.fixed_height.url);
 
-           }
-       }
-   })}
-   
+                        gifDiv.append(p);
+                        gifDiv.append(personImage);
 
- // Function for displaying movie data
- function renderButtons() {
+                        $('#gifs-appear-here').prepend(gifDiv);
 
-   // Deleting the movies prior to adding new movies
-   // (this is necessary otherwise you will have repeat buttons)
-   $("#buttons-view").empty();
+                    }
+                }
+            })
+    }
 
-   // Looping through the array of movies
-   for (var i = 0; i < movies.length; i++) {
 
-     // Then dynamicaly generating buttons for each movie in the array
-     // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-     var a = $("<button>");
-     // Adding a class of movie-btn to our button
-     a.addClass("movie-btn");
-     // Adding a data-attribute
-     a.attr("data-name", movies[i]);
-     // Providing the initial button text
-     a.text(movies[i]);
-     // Adding the button to the buttons-view div
-     $("#buttons-view").append(a);
-   }
- }
 
- // This function handles events where a movie button is clicked
- $("#add-movie").on("click", function(event) {
-   event.preventDefault();
-   // This line grabs the input from the textbox
-   var movie = $("#movie-input").val().trim();
+    function renderButtons() {
 
-   // Adding movie from the textbox to our array
-   movies.push(movie);
 
-   // Calling renderButtons which handles the processing of our movie array
-   renderButtons();
- });
+        $("#buttons-view").empty();
 
- // Adding a click event listener to all elements with a class of "movie-btn"
- $(document).on("click", ".movie-btn", displayMovieInfo);
+        // Looping through the array of cars
+        for (var i = 0; i < cars.length; i++) {
 
- // Calling the renderButtons function to display the intial buttons
- renderButtons();
-    
+            var a = $("<button>");
+
+            a.addClass("car-btn");
+
+            a.attr("data-name", cars[i]);
+
+            a.text(cars[i]);
+
+            $("#buttons-view").append(a);
+        }
+    }
+
+    // This function handles events where a car button is clicked
+    $("#add-cars").on("click", function (event) {
+        event.preventDefault();
+        // This line grabs the input from the textbox
+        var car = $("#car-input").val().trim();
+
+        // Adding car from the textbox to our array
+        cars.push(car);
+
+        // Calling renderButtons which handles the processing of our car array
+        renderButtons();
+    });
+
+    // Adding a click event listener to all elements with a class of "car-btn"
+    $(document).on("click", ".car-btn", displayInfo);
+
+//    displays btns 
+    renderButtons();
+
+
+
+    // end of working code
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // function getData() {
@@ -166,7 +182,7 @@ $(document).ready(function (){
 //                     let rating = results[i].rating;
 //                     let p = $('<p>').text('Rating ' + rating);
 //                     let personImage = $('<img>');
-                  
+
 //                     personImage.attr('src', results[i].images.fixed_height.url);
 
 //                     gifDiv.append(p);
