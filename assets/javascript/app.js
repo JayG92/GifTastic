@@ -8,7 +8,6 @@ $(document).ready(function () {
 
 
 
-    // /   get value when user clicks on submit button
     $submit.on('click', function () {
         // prevents from clearing out after hitting submit
         event.preventDefault();
@@ -16,8 +15,9 @@ $(document).ready(function () {
         // grabs value when entered in input
         console.log(inputVal);
 
-    });
 
+
+    });
 
 
 
@@ -26,7 +26,7 @@ $(document).ready(function () {
         var inputVal = $(this).attr("data-name");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + inputVal + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
 
-        
+
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -36,15 +36,21 @@ $(document).ready(function () {
                 let results = response.data;
                 for (var i = 0; i < results.length; i++) {
                     if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                        let gifDiv = $('<div>');
+                        let gifDiv = $("<div>");
                         let rating = results[i].rating;
                         let p = $('<p>').text('Rating ' + rating);
-                        let personImage = $('<img>');
+                        let carImage = $('<img>');
+                        let defaultAnimate = results[i].images.fixed_height.url;
+                        let statisSrc = results[i].images.fixed_height_still.url;
 
-                        personImage.attr('src', results[i].images.fixed_height.url);
 
+                        carImage.attr('src', results[i].images.fixed_height.url);
+                        carImage.addClass("carGif")
+                        carImage.attr('data-state', "still");
+                        carImage.attr('data-still', statisSrc);
+                        carImage.attr('data-animate', defaultAnimate);
                         gifDiv.append(p);
-                        gifDiv.append(personImage);
+                        gifDiv.append(carImage);
 
                         $('#gifs-appear-here').prepend(gifDiv);
 
@@ -90,10 +96,25 @@ $(document).ready(function () {
 
     // Adding a click event listener to all elements with a class of "car-btn"
     $(document).on("click", ".car-btn", displayInfo);
-
-//    displays btns 
+    // $(document).on("click", "#add-cars", displayInfo);
+    //    displays btns clicked
     renderButtons();
 
+
+
+    // new code added for stills//
+    $(document).on('click', ".carGif", playPause);
+    function playPause() {
+        let state = $(this).attr("data-state");
+        if (state === "still") {
+            $(this).attr('src', $(this).attr("data-animate"));
+            $(this).attr('data-state', 'animate');
+        } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr('data-state', 'still');
+        }
+    }
+    // end of new code added for still//
 
 
     // end of working code

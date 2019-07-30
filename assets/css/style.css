@@ -1,9 +1,26 @@
 .container{
-    background-color: lightslategray;
+    background-color: rgb(77, 136, 196);
     border-radius: 5px;
 }
 
 body{
-    background-color: lightblue;
+    background-color: black;
+    ;
 }
 
+input{
+    color:white;
+    background-color: blue;
+    border-radius: 4px;
+    
+}
+
+label{
+    color: white;
+}
+
+button{
+    color: aquamarine;
+    background-color: blue
+
+}
